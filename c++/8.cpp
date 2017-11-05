@@ -1,8 +1,14 @@
 // 旋转数组的最小数字
 
+// 结束条件：两指针相邻，且p2指的为最小元素
+// 特殊情况：left,mid,high三个位置的元素相同时，必须采用顺序查找的方法
+
 class Solution {
 public:
     int minNumberInRotateArray(vector<int> rotateArray) {
+        int low = 0;
+        int high = rotateArray.size() - 1;
+        int mid = 0;
 
         
     }

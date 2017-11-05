@@ -37,6 +37,7 @@ private:
 
 
 // 用两个队列实现栈
+// 每次只能从队列的头部删除元素
 class Solution1
 {
 public:
