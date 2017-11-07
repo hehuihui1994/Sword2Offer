@@ -1,7 +1,15 @@
 // 旋转数组的最小数字
 
 // 结束条件：两指针相邻，且p2指的为最小元素
-// 特殊情况：left,mid,high三个位置的元素相同时，必须采用顺序查找的方法
+// 特殊情况：left,mid,high三个位置的元素相同时，采用顺序查找的方法
+
+// 模拟指针移动
+
+
+
+#include<iostream>
+#include<vector>
+using namespace std;
 
 class Solution {
 public:
@@ -10,8 +18,42 @@ public:
         int high = rotateArray.size() - 1;
         int mid = 0;
 
+        while(rotateArray[low] >= rotateArray[high]){
+
+            if(low + 1 == high){
+                mid = high;
+                break;
+            }
+
+            mid = (low + high)/2;
+
+            if((rotateArray[mid] == rotateArray[low]) && (rotateArray[mid] == rotateArray[high]))
+                return findInOrder(rotateArray, low, high);
+
+            if(rotateArray[mid] >= rotateArray[low]){
+                low = mid;
+            }
+
+            if(rotateArray[mid] <= rotateArray[high]){
+                high = mid;
+            }
+        }
+
+        return rotateArray[mid];
+
         
     }
+
+    int findInOrder(vector<int> rotateArray, int low, int high){
+        int result = rotateArray[low];
+        for(int i=low+1; i<=high; i++){
+            if(rotateArray[i] < result){
+                result = rotateArray[i];
+            }
+        }
+        return result;
+    }
+
 };
 
 
@@ -63,3 +105,14 @@ int BinarySearchRecursive(int *array, int low, int high, int key)
     else  
         return BinarySearchRecursive(array, low, mid-1, key);  
 }  
+
+int main(){
+    // int a[] = {3,4,5,1,2};
+    int a[] = {1,0,1,1,1};
+    vector<int> b(&a[0], &a[4]);
+    // vector<int> num = {2,2,2,2,1,2};
+    Solution s;
+    cout<< s.minNumberInRotateArray(b)<<endl;
+
+    return 0;
+}
